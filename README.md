@@ -1,4 +1,4 @@
-[![Trendoscope](https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=250,fit=crop/YBg17aEx8BCroqG1/facebook_cover_photo_1-m5KDqx21y1ULZQkW.png)](https://www.trendoscope.au)
+[![Trendoscope](https://assets.zyrosite.com/YBg17aEx8BCroqG1/logo-no-background-d95yX4Bp8PhPDxZx.svg)](https://www.trendoscope.au)
 # Tradingview-Access-Management
 [![CodeFactor](https://www.codefactor.io/repository/github/trendoscope-algorithms/tradingview-access-management/badge)](https://www.codefactor.io/repository/github/trendoscope-algorithms/tradingview-access-management)
 <br>
