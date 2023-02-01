@@ -19,7 +19,8 @@ Only environment variables to be updated are:
 Please note that access management apis will only work if you have Premium Tradingview subscription.
 
 <h3>Run the repl</h3>
-Just run the repl and your services are up and running. You will get the hostname on top right part of the project dashboard. Hostname will be of the format, https://Tradingview-Access-Management.<YOUR_REPL_ACCOUN>.repl.co
+Just run the repl and your services are up and running. You will get the hostname on top right part of the project dashboard. Hostname will be of the format, 
+<pre>https://Tradingview-Access-Management.[YOUR_REPL_ACCOUN].repl.co</pre>
 
 <h1>Usage</h1>
 Once up and running, you will be able to use following calls to manage Tradingview access.
@@ -181,7 +182,7 @@ This method can be used to add/update current access level of user for particula
 ## Contributions & Thanks
 If you found this project interesting or useful, create accounts with my referral links:
 - [Tradingview](https://www.tradingview.com/?aff_id=112733)
-- [Bybit](https://partner.bybit.com/b/TRENDOSCOPE)
+- [Pepperstone](https://fwd.cx/7eFznJhh9VRT)
 - [BingX](https://bingx.com/en-us/partner/Trendoscope/)
 
 # Profiles
@@ -190,4 +191,3 @@ If you found this project interesting or useful, create accounts with my referra
 <a href="https://p.trendoscope.au/telegram"><img src="https://i.pinimg.com/originals/70/c3/ea/70c3ea9e43ebd11ec98de96937529408.jpg" width="100" height="100"></a>
 <a href="https://p.trendoscope.au/discord"><img src="https://i.pinimg.com/originals/b6/fe/4a/b6fe4a830e0263d8344b63e3dbcf3033.jpg" width="100" height="100"></a>
 <a href="https://p.trendoscope.au/youtube"><img src="https://i.pinimg.com/originals/f4/14/b8/f414b816ef11df2c1eaae61f2fc8c489.jpg" width="100" height="100"></a>
-
