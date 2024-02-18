@@ -138,9 +138,11 @@ This method can be used to add/update current access level of user for particula
 <li><b>Payload</b> - Json Payload containing list of pine ids</li>
 <ol>
 <li><b>pine_ids</b> - Array of pine ids. Pine ids are backend unique ids for each script. We can get these ids from browser developer console when script is loaded or when access methods are performed on the tradingview UI. Please note, only Pine Ids for scripts which belong to your account will work in this way. You will not be able to control the access to scripts which are not yours.</li>
+<li><b>duration</b> - String representing duration. Example, "7D" = 7 days, "2M" = 2 months, "1L" = Lifetime etc</li>
 <pre>
 {
-    "pine_ids" : ["PUB;3be120ba74944ca7b32ad644f40aaff2", "PUB;2cb3ba84ce4443049f21659a3b492779"]
+    "pine_ids" : ["PUB;3be120ba74944ca7b32ad644f40aaff2", "PUB;2cb3ba84ce4443049f21659a3b492779"],
+    "duration" : "7D"
 }
 </pre>
 </ol>
