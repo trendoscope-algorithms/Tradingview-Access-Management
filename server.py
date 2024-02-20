@@ -1,8 +1,20 @@
-from flask import Flask, request
+from flask import Flask, request, abort
 from tradingview import tradingview
 import json
+import os
 
 app = Flask('')
+
+API_KEY = os.environ['API_KEY']
+
+
+@app.before_request
+def limit_remote_addr():
+  if request.headers.get('x-api-key') and request.headers.get(
+      'x-api-key') == API_KEY:
+    pass
+  else:
+    abort(403)
 
 
 @app.route('/validate/<username>', methods=['GET'])
