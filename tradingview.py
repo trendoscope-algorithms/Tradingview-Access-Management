@@ -1,5 +1,4 @@
 import os
-from replit import db
 import config
 import requests
 import platform
@@ -7,12 +6,14 @@ from urllib3 import encode_multipart_formdata
 from datetime import datetime, timezone
 import helper
 
+_session_cache = {"sessionid": None}
+
 
 class tradingview:
 
   def __init__(self):
-    print('Getting sessionid from db')
-    self.sessionid = db["sessionid"] if 'sessionid' in db.keys() else 'abcd'
+    print('Getting sessionid from cache')
+    self.sessionid = _session_cache["sessionid"] or 'abcd'
 
     headers = {'cookie': 'sessionid=' + self.sessionid}
     test = requests.request("GET", config.urls["tvcoins"], headers=headers)
@@ -39,7 +40,7 @@ class tradingview:
                             headers=login_headers)
       cookies = login.cookies.get_dict()
       self.sessionid = cookies["sessionid"]
-      db["sessionid"] = self.sessionid
+      _session_cache["sessionid"] = self.sessionid
 
   def validate_username(self, username):
     users = requests.get(config.urls["username_hint"] + "?s=" + username)

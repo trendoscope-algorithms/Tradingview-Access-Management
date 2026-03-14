@@ -1,8 +1,8 @@
+import os
 from flask import Flask, request
 from tradingview import tradingview
 import json
-#from threading import Thread
-app = Flask('')
+app = Flask(__name__)
 @app.route('/validate/<username>', methods=['GET'])
 def validate(username):
   try:
@@ -62,4 +62,5 @@ def main():
 #   server.start()
 
 def start_server():
-  app.run(host='0.0.0.0', port=5000)
+  port = int(os.environ.get('PORT', 5000))
+  app.run(host='0.0.0.0', port=port)
