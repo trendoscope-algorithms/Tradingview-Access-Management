@@ -12,6 +12,7 @@ gunicorn = "^21.2"
 urllib3 = "^2.0"
 requests = "^2.31"
 python-dateutil = "^2.8.2"
+python-dotenv = "^1.0"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]

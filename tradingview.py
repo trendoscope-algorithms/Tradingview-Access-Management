@@ -13,8 +13,8 @@ class tradingview:
 
   def __init__(self):
     print('Getting sessionid and sessionid_sign from cache')
-    self.sessionid = _session_cache["sessionid"] or 'abcd'
-    self.sessionid_sign = _session_cache["sessionid_sign"] or 'abcd'
+    self.sessionid = _session_cache["sessionid"] or os.environ.get('tvsessionid', 'abcd')
+    self.sessionid_sign = _session_cache["sessionid_sign"] or os.environ.get('tvsessionid_sign', 'abcd')
 
     headers = {
       'cookie':
@@ -48,9 +48,11 @@ class tradingview:
         print(login)
         if login.status_code == 200:
           cookies = login.cookies.get_dict()
-          self.sessionid = cookies.get("sessionid")
-          self.sessionid_sign = cookies.get("sessionid_sign")
-          if self.sessionid and self.sessionid_sign:
+          new_sessionid = cookies.get("sessionid")
+          new_sessionid_sign = cookies.get("sessionid_sign")
+          if new_sessionid and new_sessionid_sign:
+            self.sessionid = new_sessionid
+            self.sessionid_sign = new_sessionid_sign
             _session_cache["sessionid"] = self.sessionid
             _session_cache["sessionid_sign"] = self.sessionid_sign
             print("New sessionid: ", self.sessionid)
