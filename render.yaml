@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: tradingview-access-management
+    runtime: python
+    buildCommand: pip install poetry && poetry install --only main
+    startCommand: gunicorn server:app
+    envVars:
+      - key: tvusername
+        sync: false
+      - key: tvpassword
+        sync: false
