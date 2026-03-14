@@ -3,6 +3,7 @@ name = "tradingview-access-management"
 version = "0.1.0"
 description = "TradingView Pine Script access management API"
 authors = ["Your Name <you@example.com>"]
+package-mode = false
 
 [tool.poetry.dependencies]
 python = ">=3.11,<3.13"
