@@ -1,4 +1,4 @@
-import os
+import getpass
 from replit import db
 import config
 import requests
@@ -20,8 +20,12 @@ class tradingview:
     print('sessionid from db : ' + self.sessionid)
     if test.status_code != 200:
       print('session id from db is invalid')
-      username = os.environ['tvusername']
-      password = os.environ['tvpassword']
+      username = input('TradingView username: ').strip()
+      while not username:
+        username = input('TradingView username: ').strip()
+      password = getpass.getpass('TradingView password: ')
+      while not password:
+        password = getpass.getpass('TradingView password: ')
 
       payload = {'username': username, 'password': password, 'remember': 'on'}
       body, contentType = encode_multipart_formdata(payload)
