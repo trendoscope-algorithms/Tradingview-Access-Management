@@ -2,12 +2,12 @@ import config
 import requests
 from datetime import datetime, timezone
 import helper
-from tradingview_auth_service import TradingViewAuthService
+from tradingviewAuthService import TradingviewAuthService
 
 class tradingview:
 
   def __init__(self):
-    auth = TradingViewAuthService()
+    auth = TradingviewAuthService()
     self.sessionid = auth.sessionid
 
   def validate_username(self, username):

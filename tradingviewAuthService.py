@@ -50,4 +50,4 @@ class TradingviewAuthService:
                             headers=login_headers)
       cookies = login.cookies.get_dict()
       self.sessionid = cookies["sessionid"]
-      db["sessionid"] = self.sessionid
+      session.set_sessionid(self.sessionid)
