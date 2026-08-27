@@ -5,13 +5,43 @@
 This project provides restful API access to manage tradingview script access management. This is intended to be used by vendors along with appropriate security and other workflow management tools for automation of access management.
 
 <h1>Installation</h1>
-Follow below steps to install and run the API service
-<h3>Clone repo in replit</h3>
-Goto Replit Page:
+Follow below steps to install and run the API service.
+
+<h3>Local development setup</h3>
+Clone the repository and create a Python 3.8 virtual environment:
+<pre>
+cd /path/to/Tradingview-Access-Management
+python3.8 -m venv .venv
+source .venv/bin/activate
+python --version
+</pre>
+This project targets Python 3.8, as declared in <code>pyproject.toml</code>.
+
+Install the project dependencies with Poetry:
+<pre>
+pip install --upgrade pip
+pip install poetry
+poetry install
+</pre>
+
+Set the required environment variables before running the app:
+<pre>export TV_USERNAME="your_tradingview_username"
+export TV_PASSWORD="your_tradingview_password"
+export apiKey="your_api_key"
+</pre>
+The app checks the <code>Api-Key</code> header on the routes and the TradingView login uses the <code>TV_USERNAME</code> and <code>TV_PASSWORD</code> environment variables.
+
+Start the API service with Poetry so the project dependencies and Python version are used correctly:
+<pre>
+poetry run python main.py
+</pre>
+The app listens on <code>http://localhost:5000</code>.
+
+<h3>Replit setup</h3>
+Clone repo in replit or open the project on Replit:
 https://replit.com/@trendoscope/Tradingview-Access-Management
 
-<h3>Update Replit environment variables</h3>
-Only environment variables to be updated are:
+Update Replit environment variables:
 <ul>
 <li>username - Your tradingview username</li>
 <li>password - Your tradingview password</li>
@@ -19,7 +49,7 @@ Only environment variables to be updated are:
 Please note that access management apis will only work if you have Premium Tradingview subscription.
 
 <h3>Run the repl</h3>
-Just run the repl and your services are up and running. You will get the hostname on top right part of the project dashboard. Hostname will be of the format, 
+Just run the repl and your services are up and running. You will get the hostname on top right part of the project dashboard. Hostname will be of the format,
 <pre>https://Tradingview-Access-Management.[YOUR_REPL_ACCOUN].repl.co</pre>
 
 <h1>Usage</h1>
