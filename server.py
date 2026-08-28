@@ -1,20 +1,21 @@
 import os
-from flask import Flask, request
+from flask import Flask, request, make_response
+import logging
 from tradingview import tradingview
 import json
 #from threading import Thread
 app = Flask('')
+
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 
 
 def require_api_key():
   api_key = os.environ.get('apiKey')
   provided = request.headers.get('Api-Key')
   if provided != api_key:
-    print("[X] Unvalid Api Key", provided)
-    failureResponse = {'errorMessage': 'Not Found'}
-    return json.dumps(failureResponse), 404, {
-      'Content-Type': 'application/json; charset=utf-8'
-    }
+    logger.warning('Invalid API key provided: %s', provided)
+    return make_response(json.dumps({'errorMessage': 'Not Found'}), 404)
   return None
 
 
@@ -25,19 +26,18 @@ def validate(username):
     error = require_api_key()
     if error:
       return error
-      
-    print(username)
+
+    logger.info('Validate request for username: %s', username)    
     tv = tradingview()
     response = tv.validate_username(username)
     return json.dumps(response), 200, {
       'Content-Type': 'application/json; charset=utf-8'
     }
   except Exception as e:
-    print("[X] Exception Occured : ", e)
-    failureResponse = {'errorMessage': 'Unknown Exception Occurred'}
-    return json.dumps(failureResponse), 500, {
-      'Content-Type': 'application/json; charset=utf-8'
-    }
+    logger.exception('Exception in validate: %s', e)
+    resp = make_response(json.dumps({'errorMessage': 'Unknown Exception Occurred'}), 500)
+    resp.headers['Content-Type'] = 'application/json; charset=utf-8'
+    return resp
 
 
 @app.route('/access/<username>', methods=['GET', 'POST', 'DELETE'])
@@ -68,16 +68,16 @@ def access(username):
     if request.method == 'DELETE':
       for access in accessList:
         tv.remove_access(access)
-    return json.dumps(accessList), 200, {
-      'Content-Type': 'application/json; charset=utf-8'
-    }
+    resp = make_response(json.dumps(accessList), 200)
+    resp.headers['Content-Type'] = 'application/json; charset=utf-8'
+    return resp
 
   except Exception as e:
-    print("[X] Exception Occured : ", e)
-    failureResponse = {'errorMessage': 'Unknown Exception Occurred'}
-    return json.dumps(failureResponse), 500, {
-      'Content-Type': 'application/json; charset=utf-8'
-    }
+    logger.exception('Exception in access: %s', e)
+    resp = make_response(json.dumps({'errorMessage': 'Unknown Exception Occurred'}), 500)
+    resp.headers['Content-Type'] = 'application/json; charset=utf-8'
+    return resp
+
 
 
 @app.route('/')
