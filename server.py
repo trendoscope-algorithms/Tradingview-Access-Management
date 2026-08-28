@@ -6,16 +6,26 @@ import json
 app = Flask('')
 
 
+def require_api_key():
+  api_key = os.environ.get('apiKey')
+  provided = request.headers.get('Api-Key')
+  if provided != api_key:
+    print("[X] Unvalid Api Key", provided)
+    failureResponse = {'errorMessage': 'Not Found'}
+    return json.dumps(failureResponse), 404, {
+      'Content-Type': 'application/json; charset=utf-8'
+    }
+  return None
+
+
 @app.route('/validate/<username>', methods=['GET'])
 def validate(username):
   try:
     # abort if api key is not valid
-    if request.headers.get('Api-Key') != os.environ['apiKey']:
-      print("[X] Unvalid Api Key")
-      failureResponse = {'errorMessage': 'Not Found'}
-      return json.dumps(failureResponse), 404, {
-        'Content-Type': 'application/json; charset=utf-8'
-      }
+    error = require_api_key()
+    if error:
+      return error
+      
     print(username)
     tv = tradingview()
     response = tv.validate_username(username)
@@ -34,12 +44,10 @@ def validate(username):
 def access(username):
   try:
     # abort if api key is not valid
-    if request.headers.get('Api-Key') != os.environ['apiKey']:
-      print("[X] Unvalid Api Key")
-      failureResponse = {'errorMessage': 'Not Found'}
-      return json.dumps(failureResponse), 404, {
-        'Content-Type': 'application/json; charset=utf-8'
-      }
+    error = require_api_key()
+    if error:
+      return error
+
     jsonPayload = request.json
     pine_ids = jsonPayload.get('pine_ids')
     print(jsonPayload)
