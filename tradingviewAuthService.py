@@ -52,12 +52,16 @@ class TradingviewAuthService:
                               data=body,
                               headers=login_headers)
         cookies = login.cookies.get_dict()
-        logger.info('TradingView login response: %s, %s',
-                    login.status_code, (login.text or '')[:1000])
+
         sessionid = cookies.get('sessionid')
         if sessionid:
           self.sessionid = sessionid
           session.set_sessionid(self.sessionid)
+        else:
+          logger.error('Error with the login session: %s, %s',
+                    login.status_code, (login.text or '')[:1000])
+          raise Exception('Internal Server Error')
 
       except Exception as e:
         logger.exception('Error performing login')
+        raise Exception('Internal Server Error')
