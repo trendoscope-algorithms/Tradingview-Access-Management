@@ -52,6 +52,7 @@ class TradingviewAuthService:
                               data=body,
                               headers=login_headers)
         cookies = login.cookies.get_dict()
+        logger.debug('Login response cookies: %s', cookies)
 
         sessionid = cookies.get('sessionid')
         if sessionid:
