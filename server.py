@@ -1,10 +1,10 @@
 import os
-from flask import Flask, request, make_response
-import logging
-from tradingview import tradingview
 import json
-#from threading import Thread
-app = Flask('')
+import logging
+from flask import Flask, request, make_response
+from tradingview import tradingview
+
+app = Flask(__name__)
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -85,13 +85,5 @@ def main():
   return 'Your bot is alive!'
 
 
-# def run():
-#   app.run(host='0.0.0.0', port=5000)
-
-# def start_server_async():
-#   server = Thread(target=run)
-#   server.start()
-
-
-def start_server():
-  app.run(host='0.0.0.0', port=5000)
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=5000)
